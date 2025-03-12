@@ -1,10 +1,42 @@
-version: '2'
+version: '3.8'
+
 services:
-  app:
-    build: .
-    command: ["bash", "-c", "./start.sh"]
-    volumes:
-      - .:/app
+  mongodb:
+    image: mongo:latest
+    container_name: gdvcsharp-mongo
+    restart: always
     ports:
-      - "5000:5000"
+      - "27017:27017"
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      MONGO_INITDB_DATABASE: MongoDB
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: gdvcsharp-mongo-ui
+    restart: always
+    ports:
+      - "8081:8081"  # Expose Mongo Express UI on localhost:8081
+    depends_on:
+      - mongodb
+    environment:
+      ME_CONFIG_MONGODB_SERVER: gdvcsharp-mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin  # Change for security
+      ME_CONFIG_BASICAUTH_PASSWORD: admin  # Change for security
+
+  gdvcsharp-api:
+    build: ./api/
+    container_name: gdvcsharp-api
+    restart: always
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_CONNECTION_STRING: "mongodb://gdvcsharp-mongo:27017"
+
+volumes:
+  mongo_data:
 
