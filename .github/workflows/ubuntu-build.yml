@@ -1,0 +1,20 @@
+name: Ubuntu Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build Docker image
+      run: docker build --file ./api/Dockerfile --tag test-build:$(date +%s) ./api
+      # Below line disables caching to display build output
+      #run: DOCKER_BUILDKIT=0 docker build --file ./api/Dockerfile --tag test-build:$(date +%s) --no-cache ./api
