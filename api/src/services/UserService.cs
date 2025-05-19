@@ -78,7 +78,7 @@ namespace GdvCsharp.API.Services
         {
             var user = GetUser(username);
 
-            if (user != null || user.Password == password)
+            if (user != null && user.Password == password)
             {
                 return user;
             }
