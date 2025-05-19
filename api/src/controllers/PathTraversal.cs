@@ -15,24 +15,24 @@ namespace GdvCsharp.API.Controllers
                 return BadRequest("Invalid Filename.");
             }
 
-            string baseUrl = "static/files/nutrition";
+            string baseDir = "static/files/nutrition";
 
-            string fullPath = Path.Combine(Directory.GetCurrentDirectory(), baseUrl, filename);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), baseDir, filename);
 
-            if (!System.IO.File.Exists(fullPath))
+            if (!System.IO.File.Exists(path))
             {
                 return NotFound("File not found.");
             }
 
             try
             {
-                string contents = System.IO.File.ReadAllText(fullPath);
+                string contents = System.IO.File.ReadAllText(path);
 
                 return Content(contents, "text/plain");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error reading file: {ex.Message} in {fullPath} {Directory.GetCurrentDirectory()}");
+                return StatusCode(500, $"Error reading file: {ex.Message}");
             }
         }
 
@@ -44,27 +44,28 @@ namespace GdvCsharp.API.Controllers
                 return BadRequest("Invalid Filename.");
             }
 
-            string baseUrl = "static/files/nutrition";
+            string baseDir = "static/files/nutrition";
 
             //If filename is an absolute path, current directory and baseUrl won't be included
-            string fullPath = Path.Combine(Directory.GetCurrentDirectory(), baseUrl, filename);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), baseDir, filename);
 
-            string baseDir = Path.Combine(Directory.GetCurrentDirectory(), baseUrl);
+            string absPath = Path.GetFullPath(path);
+
+            string basePath = Path.Combine(Directory.GetCurrentDirectory(), baseDir);
 
             //Check that the file path starts with the intended base directory
-            if (!fullPath.StartsWith(baseDir))
+            if (!absPath.StartsWith(basePath + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
             {
                 return BadRequest("Access Denied: Invalid Path.");
             }
-
-            if (!System.IO.File.Exists(fullPath))
+            if (!System.IO.File.Exists(absPath))
             {
                 return NotFound("File not found.");
             }
 
             try
             {
-                string contents = System.IO.File.ReadAllText(fullPath);
+                string contents = System.IO.File.ReadAllText(absPath);
 
                 return Content(contents, "text/plain");
             }
