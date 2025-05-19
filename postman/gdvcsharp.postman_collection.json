@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5a6abc34-9306-47be-8230-5943276b25bb",
+		"_postman_id": "07344273-2664-4a77-9527-8596c61a2518",
 		"name": "Methods",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "42503255"
+		"_exporter_id": "45027133",
+		"_collection_link": "https://davidmondrusov-6807300.postman.co/workspace/David-Mondrusov's-Workspace~9b7ae9aa-c9ec-4a91-88dc-8302af908aba/collection/45027133-07344273-2664-4a77-9527-8596c61a2518?action=share&source=collection_link&creator=45027133"
 	},
 	"item": [
 		{
@@ -265,6 +266,63 @@
 								{
 									"key": "phone",
 									"value": "111111111111111111111112222222222222222222222222222222222222222X"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Path Traversal",
+			"item": [
+				{
+					"name": "PathTraversal Vuln",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}:{{port}}/api/pathTraversal/vuln?filename=/etc/passwd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"pathTraversal",
+								"vuln"
+							],
+							"query": [
+								{
+									"key": "filename",
+									"value": "/etc/passwd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PathTraversal Solution",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}:{{port}}/api/pathTraversal/solution?filename=/etc/password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"pathTraversal",
+								"solution"
+							],
+							"query": [
+								{
+									"key": "filename",
+									"value": "/etc/password"
 								}
 							]
 						}
