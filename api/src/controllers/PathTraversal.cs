@@ -15,7 +15,7 @@ namespace GdvCsharp.API.Controllers
                 return BadRequest("Invalid Filename.");
             }
 
-            string baseDir = "static/files/nutrition";
+            string baseDir = "static/files";
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), baseDir, filename);
 
@@ -44,7 +44,7 @@ namespace GdvCsharp.API.Controllers
                 return BadRequest("Invalid Filename.");
             }
 
-            string baseDir = "static/files/nutrition";
+            string baseDir = "static/files";
 
             //If filename is an absolute path, current directory and baseUrl won't be included
             string path = Path.Combine(Directory.GetCurrentDirectory(), baseDir, filename);

@@ -10,7 +10,7 @@ Attackers can use path traversal to access resources such as
 - Using "../" or some encoded version of it to traverse up the directory and expand scope of access
 
 ``` zsh
-user@example:~$ curl https://LittleCeasars.example/public/%2e%2e/%2e%2e/etc/passwd
+user@example:~$ curl https://app.example/public/%2e%2e/%2e%2e/etc/passwd
 
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
@@ -20,7 +20,7 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
 - Using a previously created symbolic link to access a sensitive file
 ``` zsh
 // "ln -s /etc/passwd img1.jpg" previously run
-user@example:~$ curl https://LittleCeasars.example/public/img1.jpg
+user@example:~$ curl https://app.example/public/img1.jpg
 
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
@@ -30,7 +30,7 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
 - Using absolute path to access anything starting from the root directory (covered in example)
 
 ## Example Exploit
-Our example endpoint takes in a query filename to determine which pizza's nutritional information from the "static/files/nutrition" directory should be returned.
+Our example endpoint takes in a query filename to retrieve a file from  the "static/files" directory.
 
  
 ```csharp
@@ -44,7 +44,7 @@ public IActionResult PathTraversalVuln(string filename)
 ```
 An attempt to restrict path traversal is made by filtering out attemps to move up directories.
 ```csharp 
-    string baseDir = "static/files/nutrition";
+    string baseDir = "static/files";
 
     string path = Path.Combine(Directory.GetCurrentDirectory(), baseDir, filename);
 ```
@@ -80,7 +80,7 @@ To be sure your resulting path is valid it must be normalized and compared to it
 
 ### Corrected Endpoint
 ```csharp
-string baseDir = "static/files/nutrition";
+string baseDir = "static/files";
 
 string path = Path.Combine(Directory.GetCurrentDirectory(), baseDir, filename);
 
