@@ -37,6 +37,7 @@ namespace GdvCsharp.API.Services
                 Email = email,
                 Username = username,
                 Password = password,
+                Roles = new List<string> { "user" }
             };
 
             // Insert into database
