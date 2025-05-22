@@ -28,7 +28,6 @@ namespace GdvCsharp.API.Controllers
             try
             {
                 var response = await _httpClient.GetStringAsync(uri);
-
                 return Content(response, "text/plain");
             }
             catch (Exception ex)
@@ -55,7 +54,6 @@ namespace GdvCsharp.API.Controllers
             try
             {
                 var response = await _httpClient.GetStringAsync(uri);
-
                 return Content(response, "text/plain");
             }
             catch (Exception ex)
