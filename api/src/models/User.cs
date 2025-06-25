@@ -13,7 +13,9 @@ namespace GdvCsharp.API.Models
         public string Username { get; set; }
         public string Password { get; set; } // Bad practice: Storing passwords in plaintext
         public DateTime TrialExpires { get; set; } = DateTime.UtcNow.AddDays(14);
-        public bool IsAdmin { get; set; } = false;
+
+        [BsonElement("roles")]
+        public List<string> Roles { get; set; } = new List<string>();
     }
 }
 

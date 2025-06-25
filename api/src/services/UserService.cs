@@ -37,6 +37,7 @@ namespace GdvCsharp.API.Services
                 Email = email,
                 Username = username,
                 Password = password,
+                Roles = new List<string> { "user" }
             };
 
             // Insert into database
@@ -78,7 +79,7 @@ namespace GdvCsharp.API.Services
         {
             var user = GetUser(username);
 
-            if (user != null || user.Password == password)
+            if (user != null && user.Password == password)
             {
                 return user;
             }

@@ -7,7 +7,7 @@ db.Users.insertOne({
     "Username": "admin",
     "Password": "admin123",  // Plaintext password (OWASP A07:2021)
     "TrialExpires": new Date(),
-    "IsAdmin": true
+    "roles": ["user", "admin"]
 });
 
 db.Users.insertOne({
@@ -15,5 +15,5 @@ db.Users.insertOne({
     "Username": "test",
     "Password": "test",
     "TrialExpires": new Date(),
-    "IsAdmin": true
+    "roles": ["user", "admin"]
 });
