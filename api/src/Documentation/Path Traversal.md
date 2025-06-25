@@ -92,7 +92,7 @@ i.e. app/../src/data -> src/data
 ```csharp
 string basePath = Path.Combine(Directory.GetCurrentDirectory(), baseDir);
 ```
-You can then verify your absolute path starts as intended and belongs in the proper scope with case ignored added to avoid false-positives
+You can then verify your absolute path starts as intended and belongs in the proper scope with case ignored added to avoid false-positives.
 ```csharp
 if (!absPath.StartsWith(basePath + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
 {
@@ -101,4 +101,8 @@ if (!absPath.StartsWith(basePath + Path.DirectorySeparatorChar, StringComparison
 ```
 
 The payload:  http://localhost:5001/api/pathTraversal/vuln?filename=/etc/passwd  
-will now result in a 400 Bad Request
+will now result in a 400 Bad Request.
+
+> **Note:** Depending on how the input is used it may also be necessary to restrict certain characters once start of path is verified.
+
+
