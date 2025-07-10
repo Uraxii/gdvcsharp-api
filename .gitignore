@@ -81,3 +81,14 @@ tmp/*.db
 # Visual Studio Code #
 ######################
 .vscode
+.obsidian/community-plugins.json
+
+.obsidian/plugins/terminal/data.json
+
+.obsidian/plugins/terminal/main.js
+
+.obsidian/plugins/terminal/manifest.json
+
+.obsidian/plugins/terminal/styles.css
+
+.obsidian/workspace.json
